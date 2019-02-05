@@ -72,8 +72,8 @@ dependencies {
 
     //Opus library support
     api(platform("club.minnced:opus-java-bom:1.0.5"))
-    api("club.minnced:opus-java-api")
-    api("club.minnced:opus-java-natives")
+    api("club.minnced:opus-java-api")                // compile-time dependency
+    implementation("club.minnced:opus-java-natives") // runtime dependency
 
     //we use this only together with opus-java
     // if that dependency is excluded it also doesn't need jna anymore
