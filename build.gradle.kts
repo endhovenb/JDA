@@ -18,13 +18,10 @@
 //to build and upload everything:  "gradlew bintrayUpload"
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.jfrog.bintray.gradle.*
-import com.jfrog.bintray.gradle.tasks.*
-import groovy.util.FileTreeBuilder
-import org.apache.maven.model.*
-import org.apache.tools.ant.filters.*
-import org.gradle.jvm.tasks.*
-import java.util.Date
+import com.jfrog.bintray.gradle.BintrayExtension
+import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+import org.apache.tools.ant.filters.ReplaceTokens
+import java.util.*
 
 plugins {
     signing
@@ -74,9 +71,9 @@ dependencies {
     api("com.squareup.okhttp3:okhttp:3.12.0")
 
     //Opus library support
-    api("club.minnced:opus-java:1.0.4@pom") {
-        isTransitive = true
-    }
+    api(platform("club.minnced:opus-java-bom:1.0.5"))
+    api("club.minnced:opus-java-api")
+    api("club.minnced:opus-java-natives")
 
     //we use this only together with opus-java
     // if that dependency is excluded it also doesn't need jna anymore

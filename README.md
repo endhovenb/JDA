@@ -211,7 +211,11 @@ Be sure to replace the **VERSION** key below with the one of the versions shown 
     <exclusions>
         <exclusion>
             <groupId>club.minnced</groupId>
-            <artifactId>opus-java</artifactId>
+            <artifactId>opus-java-natives</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>club.minnced</groupId>
+            <artifactId>opus-java-api</artifactId>
         </exclusion>
     </exclusions>
 </dependency>
@@ -232,14 +236,15 @@ repositories {
 ```gradle
 dependencies {
     compile ('net.dv8tion:JDA:VERSION') {
-        exclude module: 'opus-java'
+        exclude module: 'opus-java-natives'
+        exclude module: 'opus-java-api'
     }
 }
 ```
 
 The builds are distributed using JCenter through Bintray [JDA JCenter Bintray](https://bintray.com/dv8fromtheworld/maven/JDA/)
 
-If you do not need any opus de-/encoding done by JDA (voice receive/send with PCM) you can exclude `opus-java` entirely.
+If you do not need any opus de-/encoding done by JDA (voice receive/send with PCM) you can exclude `opus-java-*` entirely.
 This can be done if you only send audio with an `AudioSendHandler` which only sends opus (`isOpus() = true`). (See [lavaplayer](https://github.com/sedmelluq/lavaplayer))
 
 If you want to use a custom opus library you can provide the absolute path to `OpusLibrary.loadFrom(String)` before using
