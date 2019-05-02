@@ -67,7 +67,7 @@ public class GuildImpl implements Guild
     private final SortedSnowflakeCacheViewImpl<TextChannel> textChannelCache = new SortedSnowflakeCacheViewImpl<>(TextChannel.class, GuildChannel::getName, Comparator.naturalOrder());
     private final SortedSnowflakeCacheViewImpl<Role> roleCache = new SortedSnowflakeCacheViewImpl<>(Role.class, Role::getName, Comparator.reverseOrder());
     private final SnowflakeCacheViewImpl<Emote> emoteCache = new SnowflakeCacheViewImpl<>(Emote.class, Emote::getName);
-    private final MemberCacheViewImpl memberCache = new MemberCacheViewImpl();
+    private final MemberCacheViewImpl memberCache;
 
     private final TLongObjectMap<DataObject> cachedPresences = MiscUtil.newLongMap();
 
@@ -93,10 +93,11 @@ public class GuildImpl implements Guild
     private boolean available;
     private boolean canSendVerification = false;
 
-    public GuildImpl(JDAImpl api, long id)
+    public GuildImpl(JDAImpl api, long id, int expectedMembers)
     {
         this.id = id;
         this.api = new UpstreamReference<>(api);
+        this.memberCache = new MemberCacheViewImpl(expectedMembers);
     }
 
     @Nonnull

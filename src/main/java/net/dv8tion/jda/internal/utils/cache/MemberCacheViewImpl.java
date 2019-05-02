@@ -27,9 +27,9 @@ import java.util.*;
 
 public class MemberCacheViewImpl extends SnowflakeCacheViewImpl<Member> implements MemberCacheView
 {
-    public MemberCacheViewImpl()
+    public MemberCacheViewImpl(int initialCapacity)
     {
-        super(Member.class, Member::getEffectiveName);
+        super(Member.class, Member::getEffectiveName, initialCapacity, .25f);
     }
 
     @Override

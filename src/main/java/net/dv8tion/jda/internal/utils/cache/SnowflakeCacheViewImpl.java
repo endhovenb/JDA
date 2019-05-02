@@ -23,6 +23,11 @@ import java.util.function.Function;
 
 public class SnowflakeCacheViewImpl<T extends ISnowflake> extends AbstractCacheView<T> implements SnowflakeCacheView<T>
 {
+    public SnowflakeCacheViewImpl(Class<T> type, Function<T, String> nameMapper, int initialCapacity, float loadFactor)
+    {
+        super(type, nameMapper, initialCapacity, loadFactor);
+    }
+
     public SnowflakeCacheViewImpl(Class<T> type, Function<T, String> nameMapper)
     {
         super(type, nameMapper);

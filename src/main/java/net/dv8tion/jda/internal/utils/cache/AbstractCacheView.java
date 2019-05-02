@@ -37,17 +37,23 @@ import java.util.stream.StreamSupport;
 
 public abstract class AbstractCacheView<T> extends ReadWriteLockCache<T> implements CacheView<T>
 {
-    protected final TLongObjectMap<T> elements = new TLongObjectHashMap<>();
+    protected final TLongObjectMap<T> elements;
     protected final T[] emptyArray;
     protected final Function<T, String> nameMapper;
     protected final Class<T> type;
 
-    @SuppressWarnings("unchecked")
     protected AbstractCacheView(Class<T> type, Function<T, String> nameMapper)
+    {
+        this(type, nameMapper, 10, .75f);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected AbstractCacheView(Class<T> type, Function<T, String> nameMapper, int initialCapacity, float loadFactor)
     {
         this.nameMapper = nameMapper;
         this.type = type;
         this.emptyArray = (T[]) Array.newInstance(type, 0);
+        this.elements = new TLongObjectHashMap<>(initialCapacity, loadFactor);
     }
 
     public void clear()

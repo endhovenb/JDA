@@ -150,7 +150,7 @@ public class EntityBuilder
 
     public GuildImpl createGuild(long guildId, DataObject guildJson, TLongObjectMap<DataObject> members)
     {
-        final GuildImpl guildObj = new GuildImpl(getJDA(), guildId);
+        final GuildImpl guildObj = new GuildImpl(getJDA(), guildId, members.size());
         final String name = guildJson.getString("name", "");
         final String iconId = guildJson.getString("icon", null);
         final String splashId = guildJson.getString("splash", null);
