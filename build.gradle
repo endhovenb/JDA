@@ -79,6 +79,8 @@ dependencies {
     //Sets the dependencies for the examples
     examplesCompile configurations.apiElements
     examplesRuntime configurations.implementation
+
+    testCompile "org.mockito:mockito-core:2.+"
 }
 
 task sourcesForRelease(type: Copy) {
